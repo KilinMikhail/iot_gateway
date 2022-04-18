@@ -9,7 +9,7 @@ module Kafka
         consumer.subscribe(ENV.fetch("KAFKA_COMMAND_TOPIC", "device-command"))
       
         consumer.each_message do |message|
-          data = JSON.parse(message)
+          data = JSON.parse(message.value)
 
           sensor = Sensor.find_by(name: data["sensorType"])
 
